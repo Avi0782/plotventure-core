@@ -91,61 +91,82 @@
     <h1 class="glow">PlotVenture - CORE</h1>
   </header>
 
-<section class="team-section">
-  <h2 class="glow">Skład Zespołu</h2>
-  <div class="team-grid">
+  <section class="team-section">
+    <h2 class="glow">Skład Zespołu</h2>
+    <div class="team-grid">
 
-    <div class="member">
-      <img src="https://i.imgur.com/43fDVgo.png" alt="Korona Właściciela" class="role-icon" data-desc="Właściciel serwera odpowiada za strategiczne zarządzanie, rozwój projektu oraz podejmowanie kluczowych decyzji. Nadzoruje cały zespół i zapewnia stabilność oraz kierunek rozwoju serwera." />
-      <h3>Avi070272<br><small>Właściciel</small></h3>
-      <p class="desc" style="display:none;"></p>
-    </div>
-
-    <div class="member">
-      <img src="https://i.imgur.com/G1NGtjL.png" alt="Ikona Admina" class="role-icon" data-desc="Administrator serwera odpowiada za codzienne zarządzanie, moderację oraz wdrażanie nowych funkcji. Wspiera właściciela w utrzymaniu porządku i jakości rozgrywki." />
-      <h3>Nick<br><small>Administrator</small></h3>
-      <p class="desc" style="display:none;"></p>
-    </div>
-
-    <div class="member">
-      <img src="https://i.imgur.com/lqMk15u.png" alt="Ikona Moderatora" class="role-icon" data-desc="Moderator dba o przestrzeganie regulaminu, rozwiązuje konflikty między graczami oraz wspiera społeczność poprzez aktywne uczestnictwo i reagowanie na zgłoszenia." />
-      <h3>Nick<br><small>Moderator</small></h3>
-      <p class="desc" style="display:none;"></p>
-    </div>
-
-    <div class="member">
-      <img src="https://i.imgur.com/XqFzbKi.png" alt="Ikona Pomocnika" class="role-icon" data-desc="Pomocnik pełni funkcję wsparcia dla graczy, odpowiada na pytania, pomaga w rozwiązywaniu problemów technicznych oraz wspiera moderatorów w codziennych obowiązkach." />
-      <h3>Nick<br><small>Pomocnik</small></h3>
-      <p class="desc" style="display:none;"></p>
-    </div>
-
-  </div>
-</section>
-
-<script>
-  const roleIcons = document.querySelectorAll('.role-icon');
-
-  roleIcons.forEach(icon => {
-    icon.style.cursor = 'pointer';
-
-    icon.addEventListener('click', () => {
-      const memberDiv = icon.parentElement;
-      const descParagraph = memberDiv.querySelector('.desc');
-
-      if (descParagraph.style.display === 'none') {
-        descParagraph.textContent = icon.getAttribute('data-desc');
-        descParagraph.style.display = 'block';
-      } else {
-        descParagraph.style.display = 'none';
-      }
-    });
-  });
-</script>
+      <div class="member">
+        <img src="https://i.imgur.com/43fDVgo.png" alt="Korona Właściciela" class="role-icon" data-desc="Właściciel serwera odpowiada za strategiczne zarządzanie, rozwój projektu oraz podejmowanie kluczowych decyzji. Nadzoruje cały zespół i zapewnia stabilność oraz kierunek rozwoju serwera." />
+        <h3>Avi070272<br><small>Właściciel</small></h3>
+        <p class="desc" style="display:none;"></p>
       </div>
 
-      <!-- Więcej osób możesz dodać kopiując .member -->
+      <div class="member">
+        <img src="https://i.imgur.com/G1NGtjL.png" alt="Ikona Admina" class="role-icon" data-desc="Administrator serwera odpowiada za codzienne zarządzanie, moderację oraz wdrażanie nowych funkcji. Wspiera właściciela w utrzymaniu porządku i jakości rozgrywki." />
+        <h3>Nick<br><small>Administrator</small></h3>
+        <p class="desc" style="display:none;"></p>
+      </div>
+
+      <div class="member">
+        <img src="https://i.imgur.com/lqMk15u.png" alt="Ikona Moderatora" class="role-icon" data-desc="Moderator dba o przestrzeganie regulaminu, rozwiązuje konflikty między graczami oraz wspiera społeczność poprzez aktywne uczestnictwo i reagowanie na zgłoszenia." />
+        <h3>Nick<br><small>Moderator</small></h3>
+        <p class="desc" style="display:none;"></p>
+      </div>
+
+      <div class="member">
+        <img src="https://i.imgur.com/XqFzbKi.png" alt="Ikona Pomocnika" class="role-icon" data-desc="Pomocnik pełni funkcję wsparcia dla graczy, odpowiada na pytania, pomaga w rozwiązywaniu problemów technicznych oraz wspiera moderatorów w codziennych obowiązkach." />
+        <h3>Nick<br><small>Pomocnik</small></h3>
+        <p class="desc" style="display:none;"></p>
+      </div>
+
+    </div>
+
+    <!-- Przyciski dołączenia do Discorda -->
+    <div style="text-align: center; margin-top: 3rem;">
+      <a href="https://discord.gg/7prNChKHnY" target="_blank" rel="noopener noreferrer" style="display: inline-block; text-decoration: none;">
+        <button style="
+          background-color: #7289da;
+          border: none;
+          border-radius: 12px;
+          padding: 0.75rem 1.5rem;
+          font-size: 1.25rem;
+          color: white;
+          cursor: pointer;
+          box-shadow: 0 0 15px #7289da;
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+          transition: background-color 0.3s, box-shadow 0.3s;
+        "
+        onmouseover="this.style.backgroundColor='#5b6eae'; this.style.boxShadow='0 0 20px #5b6eae';"
+        onmouseout="this.style.backgroundColor='#7289da'; this.style.boxShadow='0 0 15px #7289da';"
+        >
+          <img src="https://i.imgur.com/K8LzbHl.png" alt="Dołącz do społeczności Discord" style="width: 32px; height: 32px;"/>
+          Dołącz do społeczności
+        </button>
+      </a>
     </div>
   </section>
+
+  <script>
+    const roleIcons = document.querySelectorAll('.role-icon');
+
+    roleIcons.forEach(icon => {
+      icon.style.cursor = 'pointer';
+
+      icon.addEventListener('click', () => {
+        const memberDiv = icon.parentElement;
+        const descParagraph = memberDiv.querySelector('.desc');
+
+        if (descParagraph.style.display === 'none') {
+          descParagraph.textContent = icon.getAttribute('data-desc');
+          descParagraph.style.display = 'block';
+        } else {
+          descParagraph.style.display = 'none';
+        }
+      });
+    });
+  </script>
 
   <footer>
     © 2025 PlotVenture | Projekt by Avi070272
@@ -153,4 +174,3 @@
 
 </body>
 </html>
-
