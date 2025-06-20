@@ -6,6 +6,7 @@
   <title>PlotVenture - CORE</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="https://i.imgur.com/YOwM2Lg.png">
   <style>
     :root {
       --main-color: #bb86fc;
@@ -60,8 +61,6 @@
       text-decoration: none;
       font-weight: bold;
       transition: 0.3s;
-      cursor: pointer;
-      border: none;
     }
 
     .btn:hover {
@@ -79,7 +78,7 @@
       margin-bottom: 1rem;
     }
 
-    .updates, .team {
+    .updates, .team, .faq {
       display: flex;
       flex-direction: column;
       gap: 1rem;
@@ -87,16 +86,17 @@
       margin: 0 auto;
     }
 
-    .update, .member {
+    .update, .member, .faq-item {
       background-color: var(--surface);
       padding: 1rem;
       border-radius: 10px;
       box-shadow: 0 0 8px rgba(187, 134, 252, 0.2);
-      transition: transform 0.2s ease;
+      transition: 0.2s;
     }
 
-    .update:hover, .member:hover {
+    .member:hover, .update:hover, .faq-item:hover {
       transform: scale(1.02);
+      box-shadow: 0 0 10px rgba(187, 134, 252, 0.3);
     }
 
     .emoji {
@@ -131,6 +131,12 @@
       outline: 2px solid var(--main-color);
     }
 
+    .faq-item summary {
+      cursor: pointer;
+      font-weight: bold;
+      color: var(--main-color);
+    }
+
     footer {
       padding: 1rem;
       background-color: #1a1a1a;
@@ -145,120 +151,54 @@
     <img src="https://i.imgur.com/YOwM2Lg.png" alt="Bot Logo" />
     <h1>PlotVenture - CORE</h1>
     <p>Autorski bot łączący Minecrafta i Discorda. Automatyzacja, zarządzanie i innowacje — wszystko w jednym miejscu.</p>
-    <a class="btn" href="https://discord.gg/7prNChKHnY">🌐 Serwer PlotVenture</a>
+    <a class="btn" href="https://discord.gg/7prNChKHnY">🌐 Dołącz do społeczności</a>
   </header>
 
   <section>
     <h2>🛠️ Najnowsze aktualizacje</h2>
     <div class="updates">
-      <div class="update">
-        <strong>[20.06.2025]</strong> Stworzono profil bota discord.
-      </div>
-      <div class="update">
-        <strong>[-]</strong> .
-      </div>
-      <div class="update">
-        <strong>[-]</strong> .
-      </div>
+      <div class="update"><strong>[v1.1.0]</strong> Stworzono stronę główną projektu PlotVenture.</div>
+      <div class="update"><strong>[v1.0.0]</strong> Uruchomienie bota na pierwszym serwerze testowym.</div>
     </div>
   </section>
 
   <section>
-   <section>
-  <h2>👑 Zespół PlotVenture</h2>
-  <div class="team">
-
-    <div class="member">
-      <span class="emoji">👑</span>
-      <strong>avi070272</strong> — Główny Właściciel
+    <h2>👑 Skład zespołu</h2>
+    <div class="team">
+      <div class="member"><span class="emoji">👑</span> avi070272 – Główny Właściciel systemu</div>
+      <div class="member"><span class="emoji">🛠️</span> brak – Developer Bota</div>
+      <div class="member"><span class="emoji">🛡️</span> brak – Tester i moderator społeczności</div>
+      <div class="member"><span class="emoji">🎨</span> brak – Grafik Bota</div>
     </div>
-
-    <div class="member">
-      <span class="emoji">🧩</span>
-      <strong>—</strong> — Developer Bota
-    </div>
-
-    <div class="member">
-      <span class="emoji">🛡️</span>
-      <strong>—</strong> — Moderator / Tester
-    </div>
-
-    <div class="member">
-      <span class="emoji">🎨</span>
-      <strong>—</strong> — Grafik Serwera
-    </div>
-
-    <div class="member">
-      <span class="emoji">⚙️</span>
-      <strong>—</strong> — DevOps
-
-  </div>
-</section>
-
+  </section>
 
   <section>
-    <h2>📬 Kontakt z Administracją </h2>
-    <form id="contactForm">
-      <input type="text" name="name" placeholder="Twoje imię" required />
+    <h2>📋 Najczęstsze pytania (FAQ)</h2>
+    <div class="faq">
+      <details class="faq-item">
+        <summary>Czy bot działa tylko na Discordzie?</summary>
+        <p>Nie, bot współdziała również z serwerami Minecrafta.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Czy mogę zgłosić błąd?</summary>
+        <p>Tak, przez formularz kontaktowy lub Discord.</p>
+      </details>
+    </div>
+  </section>
+
+  <section>
+    <h2>📬 formularz kontaktowy </h2>
+    <form name="kontakt" method="POST" data-netlify="true">
+      <input type="text" name="name" placeholder="Nazwa" required />
       <input type="email" name="email" placeholder="Twój e-mail" required />
-      <textarea name="message" rows="5" placeholder="Twoja wiadomość..." required></textarea>
+      <textarea name="message" rows="5" placeholder="Treść" required></textarea>
       <button class="btn" type="submit">Wyślij wiadomość</button>
     </form>
   </section>
 
   <footer>
-    © 2025 PlotVenture - CORE. Stworzono z pasją dla graczy.
+    © 2025 PlotVenture - CORE. Projekt zrealizowany z pasji do gier i automatyzacji.
   </footer>
-
-  <script>
-    const form = document.getElementById('contactForm');
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      const name = form.name.value.trim();
-      const email = form.email.value.trim();
-      const message = form.message.value.trim();
-
-      if (!name || !email || !message) {
-        alert('Proszę wypełnić wszystkie pola.');
-        return;
-      }
-
-     const webhookURL = 'https://discord.com/api/webhooks/1385661490794598461/TkirOjnpJu7aQ7mHpJW7C5OlX4HvNCa5VuF1cXNLIGXdEixAIVbFnU-373mqReloHEWx';  // <-- Tu wklej swój webhook Discorda
-
-      const payload = {
-        content: null,
-        embeds: [{
-          title: "Nowa wiadomość z formularza kontaktowego",
-          color: 0xBB86FC,
-          fields: [
-            { name: "Imię", value: name, inline: true },
-            { name: "E-mail", value: email, inline: true },
-            { name: "Wiadomość", value: message }
-          ],
-          timestamp: new Date().toISOString()
-        }]
-      };
-
-      try {
-        const response = await fetch(webhookURL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-
-        if (response.ok) {
-          alert('Wiadomość została wysłana! Dziękujemy za kontakt.');
-          form.reset();
-        } else {
-          alert('Coś poszło nie tak. Spróbuj ponownie później.');
-        }
-      } catch (error) {
-        alert('Błąd podczas wysyłania wiadomości.');
-        console.error(error);
-      }
-    });
-  </script>
 
 </body>
 </html>
