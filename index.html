@@ -1,1 +1,128 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PlotVenture - CORE</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: radial-gradient(ellipse at top left, #3a0066, #000000);
+      color: white;
+      overflow-x: hidden;
+    }
+
+    header {
+      text-align: center;
+      padding: 2rem;
+      background-color: rgba(0, 0, 0, 0.5);
+      border-bottom: 2px solid #9f5fff;
+    }
+
+    header img {
+      width: 150px;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 0 20px #9f5fff;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin: 1rem 0 0.5rem;
+      text-shadow: 0 0 10px #9f5fff;
+    }
+
+    .team-section {
+      padding: 2rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 2rem;
+    }
+
+    .member {
+      background-color: #1c0033;
+      border: 2px solid #9f5fff;
+      border-radius: 15px;
+      padding: 1rem;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(159, 95, 255, 0.6);
+      transition: transform 0.3s;
+    }
+
+    .member:hover {
+      transform: scale(1.05);
+    }
+
+    .member img {
+      width: 64px;
+      height: 64px;
+      object-fit: contain;
+      margin-bottom: 0.5rem;
+    }
+
+    .member h3 {
+      margin: 0.5rem 0 0;
+      font-size: 1.1rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #120020;
+      border-top: 1px solid #9f5fff;
+      margin-top: 3rem;
+    }
+
+    .glow {
+      text-shadow: 0 0 5px #c086ff, 0 0 15px #9f5fff;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="https://i.imgur.com/4JWGMhx.png" alt="PlotVenture Logo" />
+    <h1 class="glow">PlotVenture - CORE</h1>
+  </header>
+
+  <section class="team-section">
+    <h2 class="glow">Skład Zespołu</h2>
+    <div class="team-grid">
+      <div class="member">
+        <img src="https://i.imgur.com/43fDVgo.png" alt="Korona Właściciela" />
+        <h3>Avi070272<br><small>Właściciel</small></h3>
+      </div>
+
+      <!-- Przykładowe sloty do uzupełnienia -->
+      <div class="member">
+        <img src="https://i.imgur.com/G1NGtjL.png" alt="Ikona Admina" />
+        <h3>Nick<br><small>Administrator</small></h3>
+      </div>
+
+      <div class="member">
+        <img src="https://i.imgur.com/lqMk15u.png" alt="Ikona Moderatora" />
+        <h3>Nick<br><small>Moderator</small></h3>
+      </div>
+
+      <div class="member">
+        <img src="https://i.imgur.com/XqFzbKi.png" alt="Ikona Pomocnika" />
+        <h3>Nick<br><small>Pomocnik</small></h3>
+      </div>
+
+      <!-- Więcej osób możesz dodać kopiując .member -->
+    </div>
+  </section>
+
+  <footer>
+    © 2025 PlotVenture | Projekt by Avi070272
+  </footer>
+
+</body>
+</html>
 
