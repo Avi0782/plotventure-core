@@ -60,6 +60,8 @@
       text-decoration: none;
       font-weight: bold;
       transition: 0.3s;
+      cursor: pointer;
+      border: none;
     }
 
     .btn:hover {
@@ -163,17 +165,17 @@
 
   <section>
    <h2>👑 Skład zespołu</h2>
-<div class="team">
-  <div class="member"><span class="emoji">👑</span> Avi0782 – Główny Właściciel systemu</div>
-  <div class="member"><span class="emoji">🛠️</span> brak – Developer Bota </div>
-  <div class="member"><span class="emoji">🛡️</span> brak – Tester i moderator społeczności</div>
-  <div class="member"><span class="emoji">🎨</span> brak – Grafik Bota </div>
-    </div>
+   <div class="team">
+     <div class="member"><span class="emoji">👑</span> Avi0782 – Główny Właściciel systemu</div>
+     <div class="member"><span class="emoji">🛠️</span> brak – Developer Bota </div>
+     <div class="member"><span class="emoji">🛡️</span> brak – Tester i moderator społeczności</div>
+     <div class="member"><span class="emoji">🎨</span> brak – Grafik Bota </div>
+   </div>
   </section>
 
   <section>
-    <h2>📬 Formularz kontaktowy</h2>
-    <form name="kontakt" method="POST" data-netlify="true">
+    <h2>📬 Kontakt z Administracją </h2>
+    <form id="contactForm">
       <input type="text" name="name" placeholder="Twoje imię" required />
       <input type="email" name="email" placeholder="Twój e-mail" required />
       <textarea name="message" rows="5" placeholder="Twoja wiadomość..." required></textarea>
@@ -184,6 +186,56 @@
   <footer>
     © 2025 PlotVenture - CORE. Stworzono z pasją dla graczy.
   </footer>
+
+  <script>
+    const form = document.getElementById('contactForm');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const name = form.name.value.trim();
+      const email = form.email.value.trim();
+      const message = form.message.value.trim();
+
+      if (!name || !email || !message) {
+        alert('Proszę wypełnić wszystkie pola.');
+        return;
+      }
+
+      const webhookURL = 'YOUR_DISCORD_WEBHOOK_URL'; // <-- Tu wklej swój webhook Discorda
+
+      const payload = {
+        content: null,
+        embeds: [{
+          title: "Nowa wiadomość z formularza kontaktowego",
+          color: 0xBB86FC,
+          fields: [
+            { name: "Imię", value: name, inline: true },
+            { name: "E-mail", value: email, inline: true },
+            { name: "Wiadomość", value: message }
+          ],
+          timestamp: new Date().toISOString()
+        }]
+      };
+
+      try {
+        const response = await fetch(webhookURL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        if (response.ok) {
+          alert('Wiadomość została wysłana! Dziękujemy za kontakt.');
+          form.reset();
+        } else {
+          alert('Coś poszło nie tak. Spróbuj ponownie później.');
+        }
+      } catch (error) {
+        alert('Błąd podczas wysyłania wiadomości.');
+        console.error(error);
+      }
+    });
+  </script>
 
 </body>
 </html>
