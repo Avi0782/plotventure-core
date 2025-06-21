@@ -5,172 +5,244 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>PlotVenture - CORE</title>
   <style>
+    :root {
+      --bg-color: #0e001a;
+      --text-color: #ffffff;
+      --accent: #9f5fff;
+      --panel: #1c0033;
+      --header-bg: rgba(0, 0, 0, 0.5);
+      --footer-bg: #120020;
+    }
+    [data-theme="light"] {
+      --bg-color: #f5f5f5;
+      --text-color: #1a1a1a;
+      --accent: #6a0dad;
+      --panel: #e0d6f5;
+      --header-bg: #ffffff;
+      --footer-bg: #f0eaff;
+    }
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: radial-gradient(ellipse at top left, #3a0066, #000000);
-      color: white;
+      background: var(--bg-color);
+      color: var(--text-color);
       overflow-x: hidden;
+      transition: background 0.3s, color 0.3s;
     }
-
+    nav {
+      background: var(--panel);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--accent);
+    }
+    nav .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--accent);
+    }
+    nav .links a {
+      color: var(--text-color);
+      margin-left: 1.5rem;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    nav .links a:hover {
+      color: var(--accent);
+    }
+    nav .toggle-theme {
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: var(--text-color);
+      font-size: 1.2rem;
+    }
     header {
       text-align: center;
       padding: 2rem;
-      background-color: rgba(0, 0, 0, 0.5);
-      border-bottom: 2px solid #9f5fff;
+      background-color: var(--header-bg);
+      border-bottom: 2px solid var(--accent);
     }
-
     header img {
       width: 150px;
       height: auto;
       border-radius: 12px;
-      box-shadow: 0 0 20px #9f5fff;
+      box-shadow: 0 0 20px var(--accent);
     }
-
     h1 {
       font-size: 3rem;
       margin: 1rem 0 0.5rem;
-      text-shadow: 0 0 10px #9f5fff;
+      text-shadow: 0 0 10px var(--accent);
     }
-
-    .team-section {
+    .team-section, .contact-section {
       padding: 2rem;
       max-width: 1000px;
       margin: auto;
     }
-
     .team-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 2rem;
     }
-
     .member {
-      background-color: #1c0033;
-      border: 2px solid #9f5fff;
+      background-color: var(--panel);
+      border: 2px solid var(--accent);
       border-radius: 15px;
       padding: 1rem;
       text-align: center;
       box-shadow: 0 0 20px rgba(159, 95, 255, 0.6);
       transition: transform 0.3s;
     }
-
     .member:hover {
       transform: scale(1.05);
     }
-
     .member img {
       width: 64px;
       height: 64px;
       object-fit: contain;
       margin-bottom: 0.5rem;
     }
-
     .member h3 {
       margin: 0.5rem 0 0;
       font-size: 1.1rem;
     }
-
+    .discord-btn {
+      background-color: #5865F2;
+      border: none;
+      border-radius: 12px;
+      padding: 1rem 2rem;
+      font-size: 1.25rem;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 0 15px #5865F2;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin: 2rem auto 0;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .discord-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px #5865F2;
+    }
+    .contact-section form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .contact-section input, .contact-section textarea {
+      padding: 1rem;
+      border: 1px solid var(--accent);
+      border-radius: 8px;
+      background-color: var(--panel);
+      color: var(--text-color);
+    }
+    .contact-section button {
+      padding: 1rem;
+      border: none;
+      background-color: var(--accent);
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .contact-section button:hover {
+      opacity: 0.9;
+    }
     footer {
       text-align: center;
       padding: 1rem;
-      background: #120020;
-      border-top: 1px solid #9f5fff;
+      background: var(--footer-bg);
+      border-top: 1px solid var(--accent);
       margin-top: 3rem;
-    }
-
-    .glow {
-      text-shadow: 0 0 5px #c086ff, 0 0 15px #9f5fff;
     }
   </style>
 </head>
 <body>
 
+  <nav>
+    <div class="logo">PlotVenture</div>
+    <div class="links">
+      <a href="#">Strona Główna</a>
+      <a href="#team">Zespół</a>
+      <a href="#kontakt">Kontakt</a>
+    </div>
+    <button class="toggle-theme" onclick="toggleTheme()">🌙</button>
+  </nav>
+
   <header>
-    <img src="https://imgur.com/a/8Vrp66V#QgCSy4d" alt="PlotVenture Logo" />
-    <h1 class="glow">PlotVenture - CORE</h1>
+    <img src="https://i.imgur.com/QgCSy4d.png" alt="PlotVenture Logo" />
+    <h1>PlotVenture - CORE</h1>
   </header>
 
-  <section class="team-section">
-    <h2 class="glow">Skład Zespołu</h2>
+  <section id="team" class="team-section">
+    <h2>Skład Zespołu</h2>
     <div class="team-grid">
-
       <div class="member">
-        <img src="https://i.imgur.com/43fDVgo.png" alt="Korona Właściciela" class="role-icon" data-desc="Właściciel serwera odpowiada za strategiczne zarządzanie, rozwój projektu oraz podejmowanie kluczowych decyzji. Nadzoruje cały zespół i zapewnia stabilność oraz kierunek rozwoju serwera." />
+        <img src="https://i.imgur.com/43fDVgo.png" alt="Właściciel" />
         <h3>Avi070272<br><small>Właściciel</small></h3>
-        <p class="desc" style="display:none;"></p>
       </div>
-
       <div class="member">
-        <img src="https://i.imgur.com/G1NGtjL.png" alt="Ikona Admina" class="role-icon" data-desc="Administrator serwera odpowiada za codzienne zarządzanie, moderację oraz wdrażanie nowych funkcji. Wspiera właściciela w utrzymaniu porządku i jakości rozgrywki." />
+        <img src="https://i.imgur.com/G1NGtjL.png" alt="Admin" />
         <h3>Nick<br><small>Administrator</small></h3>
-        <p class="desc" style="display:none;"></p>
       </div>
-
       <div class="member">
-        <img src="https://i.imgur.com/lqMk15u.png" alt="Ikona Moderatora" class="role-icon" data-desc="Moderator dba o przestrzeganie regulaminu, rozwiązuje konflikty między graczami oraz wspiera społeczność poprzez aktywne uczestnictwo i reagowanie na zgłoszenia." />
+        <img src="https://i.imgur.com/lqMk15u.png" alt="Moderator" />
         <h3>Nick<br><small>Moderator</small></h3>
-        <p class="desc" style="display:none;"></p>
       </div>
-
       <div class="member">
-        <img src="https://i.imgur.com/XqFzbKi.png" alt="Ikona Pomocnika" class="role-icon" data-desc="Pomocnik pełni funkcję wsparcia dla graczy, odpowiada na pytania, pomaga w rozwiązywaniu problemów technicznych oraz wspiera moderatorów w codziennych obowiązkach." />
+        <img src="https://i.imgur.com/XqFzbKi.png" alt="Pomocnik" />
         <h3>Nick<br><small>Pomocnik</small></h3>
-        <p class="desc" style="display:none;"></p>
       </div>
-
     </div>
 
-    <!-- Przyciski dołączenia do Discorda -->
-    <div style="text-align: center; margin-top: 3rem;">
-      <a href="https://discord.gg/7prNChKHnY" target="_blank" rel="noopener noreferrer" style="display: inline-block; text-decoration: none;">
-        <button style="
-          background-color: #7289da;
-          border: none;
-          border-radius: 12px;
-          padding: 0.75rem 1.5rem;
-          font-size: 1.25rem;
-          color: white;
-          cursor: pointer;
-          box-shadow: 0 0 15px #7289da;
-          display: flex;
-          align-items: center;
-          gap: 0.75rem;
-          transition: background-color 0.3s, box-shadow 0.3s;
-        "
-        onmouseover="this.style.backgroundColor='#5b6eae'; this.style.boxShadow='0 0 20px #5b6eae';"
-        onmouseout="this.style.backgroundColor='#7289da'; this.style.boxShadow='0 0 15px #7289da';"
-        >
-          <img src="https://i.imgur.com/K8LzbHl.png" alt="Dołącz do społeczności Discord" style="width: 32px; height: 32px;"/>
-          Dołącz do społeczności
-        </button>
-      </a>
-    </div>
+    <a href="https://discord.gg/7prNChKHnY" target="_blank" rel="noopener noreferrer">
+      <button class="discord-btn">
+        <img src="https://i.imgur.com/K8LzbHl.png" alt="Discord" style="width: 32px; height: 32px;"/>
+        Dołącz do społeczności
+      </button>
+    </a>
   </section>
 
-  <script>
-    const roleIcons = document.querySelectorAll('.role-icon');
-
-    roleIcons.forEach(icon => {
-      icon.style.cursor = 'pointer';
-
-      icon.addEventListener('click', () => {
-        const memberDiv = icon.parentElement;
-        const descParagraph = memberDiv.querySelector('.desc');
-
-        if (descParagraph.style.display === 'none') {
-          descParagraph.textContent = icon.getAttribute('data-desc');
-          descParagraph.style.display = 'block';
-        } else {
-          descParagraph.style.display = 'none';
-        }
-      });
-    });
-  </script>
+  <section id="kontakt" class="contact-section">
+    <h2>Kontakt z Administracją - Centrum Wsparcia</h2>
+    <form id="contactForm">
+      <input type="text" name="user" placeholder="Twój nick lub imię" required />
+      <input type="email" name="email" placeholder="Adres e-mail (opcjonalnie)" />
+      <textarea name="message" placeholder="Wiadomość do administracji..." rows="5" required></textarea>
+      <button type="submit">Wyślij wiadomość</button>
+    </form>
+  </section>
 
   <footer>
     © 2025 PlotVenture | Projekt by PlotVenture.pl
   </footer>
+
+  <script>
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute("data-theme");
+      document.documentElement.setAttribute("data-theme", current === "light" ? "dark" : "light");
+    }
+
+    document.getElementById('contactForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const user = e.target.user.value;
+      const email = e.target.email.value;
+      const message = e.target.message.value;
+      const content = `**Nowa wiadomość z formularza kontaktowego:**\n👤 Użytkownik: ${user}\n📧 Email: ${email || "nie podano"}\n📨 Treść:\n${message}`;
+
+      await fetch("https://discord.com/api/webhooks/1385661490794598461/TkirOjnpJu7aQ7mHpJW7C5OlX4HvNCa5VuF1cXNLIGXdEixAIVbFnU-373mqReloHEWx", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ content })
+      });
+
+      alert("Wiadomość została wysłana!");
+      e.target.reset();
+    });
+  </script>
 
 </body>
 </html>
