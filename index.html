@@ -12,6 +12,7 @@
       --panel: #1c0033;
       --header-bg: rgba(0, 0, 0, 0.5);
       --footer-bg: #120020;
+      --news-bg: #2a004d;
     }
     [data-theme="light"] {
       --bg-color: #f5f5f5;
@@ -20,6 +21,7 @@
       --panel: #e0d6f5;
       --header-bg: #ffffff;
       --footer-bg: #f0eaff;
+      --news-bg: #cdb4db;
     }
     body {
       margin: 0;
@@ -75,6 +77,25 @@
       font-size: 3rem;
       margin: 1rem 0 0.5rem;
       text-shadow: 0 0 10px var(--accent);
+    }
+    /* Nowa sekcja Aktualności */
+    .news-section {
+      max-width: 1000px;
+      margin: 1rem auto;
+      background-color: var(--news-bg);
+      border-radius: 12px;
+      padding: 1rem 2rem;
+      box-shadow: 0 0 15px var(--accent);
+      color: var(--text-color);
+      font-size: 1.1rem;
+      border: 2px solid var(--accent);
+    }
+    .news-section h2 {
+      margin-top: 0;
+      font-size: 1.8rem;
+      text-align: center;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 0 6px var(--accent);
     }
     .team-section, .contact-section {
       padding: 2rem;
@@ -157,6 +178,20 @@
       background: var(--footer-bg);
       border-top: 1px solid var(--accent);
       margin-top: 3rem;
+      font-size: 0.9rem;
+      color: var(--text-color);
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    footer a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
@@ -166,6 +201,7 @@
     <div class="logo">PlotVenture</div>
     <div class="links">
       <a href="#">Strona Główna</a>
+      <a href="#news">Aktualności</a>
       <a href="#team">Zespół</a>
       <a href="#kontakt">Kontakt</a>
     </div>
@@ -176,6 +212,12 @@
     <img src="https://i.imgur.com/QgCSy4d.png" alt="PlotVenture Logo" />
     <h1>PlotVenture - CORE</h1>
   </header>
+
+  <section id="news" class="news-section">
+    <h2>Aktualności</h2>
+    <p>Witamy na stronie PlotVenture! Najnowsza aktualizacja 21.06.2025: Dodaliśmy formularz kontaktowy z integracją Discord, ulepszyliśmy responsywność oraz dodaliśmy tryb jasny/ciemny.</p>
+    <p>Śledź nas, aby być na bieżąco z wszystkimi nowościami!</p>
+  </section>
 
   <section id="team" class="team-section">
     <h2>Skład Zespołu</h2>
@@ -217,7 +259,10 @@
   </section>
 
   <footer>
-    © 2025 PlotVenture | Projekt by PlotVenture.pl
+    <a href="/polityka-prywatnosci.html" target="_blank" rel="noopener noreferrer">Polityka prywatności</a>
+    <span>© 2025 PlotVenture</span>
+    <span>Aktualizacje</span>
+    <a href="https://plotventure.pl" target="_blank" rel="noopener noreferrer">Projekt by PlotVenture.pl</a>
   </footer>
 
   <script>
