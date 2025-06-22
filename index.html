@@ -3,8 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>PlotVenture - CORE</title>
-  
+  <title>PlotVenture - CORE | Oficjalna Strona Projektu</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="https://i.imgur.com/QgCSy4d.png" type="image/png" />
+
   <!-- FontAwesome dla ikon social media -->
   <link
     rel="stylesheet"
@@ -45,6 +48,8 @@
       justify-content: space-between;
       align-items: center;
       border-bottom: 2px solid var(--accent);
+      flex-wrap: wrap;
+      gap: 1rem;
     }
     nav .logo {
       font-size: 1.5rem;
@@ -85,6 +90,32 @@
       margin: 1rem 0 0.5rem;
       text-shadow: 0 0 10px var(--accent);
     }
+    /* Sekcja Opis Projektu */
+    .about-section {
+      max-width: 900px;
+      margin: 2rem auto;
+      background-color: var(--panel);
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 20px var(--accent);
+      border: 2px solid var(--accent);
+    }
+    .about-section h2 {
+      margin-top: 0;
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 6px var(--accent);
+    }
+    .about-section p, .about-section ul {
+      font-size: 1.1rem;
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+    .about-section ul {
+      list-style: inside disc;
+    }
+
     /* Nowa sekcja Aktualności */
     .news-section {
       max-width: 1000px;
@@ -109,7 +140,8 @@
       font-size: 1.3rem;
       text-shadow: 0 0 4px var(--accent);
     }
-    .team-section, .contact-section {
+    /* Zespół */
+    .team-section, .contact-section, .join-section {
       padding: 2rem;
       max-width: 1000px;
       margin: auto;
@@ -160,11 +192,49 @@
       transform: scale(1.05);
       box-shadow: 0 0 25px #5865F2;
     }
+    /* Sekcja Dołącz do Zespołu */
+    .join-section {
+      background-color: var(--panel);
+      border-radius: 12px;
+      padding: 2rem;
+      border: 2px solid var(--accent);
+      box-shadow: 0 0 15px var(--accent);
+      text-align: center;
+      margin-top: 3rem;
+    }
+    .join-section h2 {
+      margin-top: 0;
+      font-size: 1.8rem;
+      text-shadow: 0 0 6px var(--accent);
+    }
+    .join-section p {
+      font-size: 1.1rem;
+      margin: 1rem 0;
+    }
+    .join-section a.button {
+      display: inline-block;
+      background-color: var(--accent);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      font-weight: 600;
+      border-radius: 10px;
+      text-decoration: none;
+      box-shadow: 0 0 10px var(--accent);
+      transition: background-color 0.3s;
+    }
+    .join-section a.button:hover {
+      background-color: #7e3ff2;
+    }
+
+    /* Formularz kontaktowy */
     .contact-section form {
       display: flex;
       flex-direction: column;
       gap: 1rem;
       margin-top: 2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
     }
     .contact-section input, .contact-section textarea {
       padding: 1rem;
@@ -172,6 +242,8 @@
       border-radius: 8px;
       background-color: var(--panel);
       color: var(--text-color);
+      font-size: 1rem;
+      resize: vertical;
     }
     .contact-section button {
       padding: 1rem;
@@ -180,6 +252,9 @@
       color: white;
       border-radius: 8px;
       cursor: pointer;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: opacity 0.3s;
     }
     .contact-section button:hover {
       opacity: 0.9;
@@ -206,7 +281,6 @@
     footer a:hover {
       text-decoration: underline;
     }
-
     /* Style social media */
     .social-media a {
       color: var(--accent);
@@ -216,6 +290,25 @@
     }
     .social-media a:hover {
       color: #fff;
+    }
+
+    /* Responsywność */
+    @media (max-width: 600px) {
+      nav .links {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      nav .links a {
+        margin: 0.5rem 1rem;
+      }
+      header h1 {
+        font-size: 2.2rem;
+      }
+      .team-grid {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      }
     }
   </style>
 </head>
@@ -227,9 +320,10 @@
       <a href="#">Strona Główna</a>
       <a href="#news">Aktualności</a>
       <a href="#team">Zespół</a>
+      <a href="#join">Dołącz</a>
       <a href="#kontakt">Kontakt</a>
     </div>
-    <button class="toggle-theme" onclick="toggleTheme()">🌙</button>
+    <button class="toggle-theme" onclick="toggleTheme()" aria-label="Przełącz motyw">🌙</button>
   </nav>
 
   <header>
@@ -237,11 +331,27 @@
     <h1>PlotVenture - CORE</h1>
   </header>
 
+  <!-- Sekcja Opis Projektu -->
+  <section class="about-section" id="about">
+    <h2>O projekcie PlotVenture - CORE</h2>
+    <p>PlotVenture - CORE to innowacyjny projekt, który ma na celu stworzenie zaawansowanego narzędzia do zarządzania i planowania fabuły w grach i opowiadaniach interaktywnych.</p>
+    <p>Nasza misja to ułatwienie twórcom i graczom tworzenia spójnych i rozbudowanych światów fabularnych poprzez intuicyjne i elastyczne rozwiązania.</p>
+    <h3>Roadmapa:</h3>
+    <ul>
+      <li>Q2 2025: Premiera wersji alfa</li>
+      <li>Q3 2025: Dodanie funkcji współpracy zespołowej</li>
+      <li>Q4 2025: Integracja z popularnymi silnikami gier</li>
+      <li>Q1 2026: Publiczne beta-testy i optymalizacje</li>
+    </ul>
+  </section>
+
+  <!-- Sekcja Aktualności -->
   <section id="news" class="news-section">
     <h2>Aktualności</h2>
     <div id="news-list">Ładowanie aktualności...</div>
   </section>
 
+  <!-- Sekcja Zespół -->
   <section id="team" class="team-section">
     <h2>Skład Zespołu</h2>
     <div class="team-grid">
@@ -263,60 +373,4 @@
       </div>
     </div>
 
-    <a href="https://discord.gg/7prNChKHnY" target="_blank" rel="noopener noreferrer">
-      <button class="discord-btn">
-        <img src="https://i.imgur.com/K8LzbHl.png" alt="Discord" style="width: 32px; height: 32px;"/>
-        Dołącz do społeczności
-      </button>
-    </a>
-  </section>
-
-  <section id="kontakt" class="contact-section">
-    <h2>Kontakt z Administracją - Centrum Wsparcia</h2>
-    <form id="contactForm">
-      <input type="text" name="user" placeholder="Twój nick lub imię" required />
-      <input type="email" name="email" placeholder="Adres e-mail (opcjonalnie)" />
-      <textarea name="message" placeholder="Wiadomość do administracji..." rows="5" required></textarea>
-      <button type="submit">Wyślij wiadomość</button>
-    </form>
-  </section>
-
-  <footer>
-    <a href="https://avi0782.github.io/plotventure-core/polityka-prywatnosci.html" target="_blank" rel="noopener noreferrer">Polityka prywatności</a>
-    <span>© 2025 PlotVenture</span>
-    <!-- Sekcja social media -->
-    <div class="social-media">
-      <a href="https://facebook.com/TwojProfil" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-      <a href="https://twitter.com/TwojProfil" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-      <a href="https://instagram.com/TwojProfil" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-      <a href="https://discord.gg/7prNChKHnY" target="_blank" aria-label="Discord"><i class="fab fa-discord"></i></a>
-    </div>
-  </footer>
-
-  <script>
-    function toggleTheme() {
-      const current = document.documentElement.getAttribute("data-theme");
-      document.documentElement.setAttribute("data-theme", current === "light" ? "dark" : "light");
-    }
-
-    // Ładowanie aktualności z news.json
-    async function loadNews() {
-      const newsList = document.getElementById('news-list');
-      try {
-        const response = await fetch('data/news.json');
-        if (!response.ok) throw new Error('Nie udało się załadować aktualności.');
-        const news = await response.json();
-
-        if (news.length === 0) {
-          newsList.innerHTML = '<p>Brak aktualności.</p>';
-          return;
-        }
-
-        newsList.innerHTML = news.map(item => `
-          <article>
-            <h3>${item.title} <small>(${item.date})</small></h3>
-            <p>${item.content}</p>
-          </article>
-        `).join('');
-      } catch (err) {
-        news
+    <a href="https://discord.gg/7prNChKHnY" target="_blank" rel="noopener noreferrer
