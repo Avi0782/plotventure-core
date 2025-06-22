@@ -312,11 +312,19 @@
           return;
         }
 
-        newsList.innerHTML = news.map(item => 
+        newsList.innerHTML = news.map(item => `
           <article>
             <h3>${item.title} <small>(${item.date})</small></h3>
             <p>${item.content}</p>
           </article>
-        ).join('');
+        `).join('');
       } catch (err) {
-        news
+        newsList.innerHTML = '<p>Błąd podczas ładowania aktualności.</p>';
+        console.error(err);
+      }
+    }
+
+    loadNews();
+  </script>
+</body>
+</html>
