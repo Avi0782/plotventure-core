@@ -4,6 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>PlotVenture - CORE</title>
+  
+  <!-- FontAwesome dla ikon social media -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+
   <style>
     :root {
       --bg-color: #0e001a;
@@ -97,6 +104,11 @@
       margin-bottom: 0.5rem;
       text-shadow: 0 0 6px var(--accent);
     }
+    .news-section article h3 {
+      margin-bottom: 0.25rem;
+      font-size: 1.3rem;
+      text-shadow: 0 0 4px var(--accent);
+    }
     .team-section, .contact-section {
       padding: 2rem;
       max-width: 1000px;
@@ -184,6 +196,7 @@
       justify-content: center;
       flex-wrap: wrap;
       gap: 10px;
+      align-items: center;
     }
     footer a {
       color: var(--accent);
@@ -192,6 +205,17 @@
     }
     footer a:hover {
       text-decoration: underline;
+    }
+
+    /* Style social media */
+    .social-media a {
+      color: var(--accent);
+      margin: 0 0.5rem;
+      font-size: 1.5rem;
+      transition: color 0.3s;
+    }
+    .social-media a:hover {
+      color: #fff;
     }
   </style>
 </head>
@@ -215,8 +239,7 @@
 
   <section id="news" class="news-section">
     <h2>Aktualności</h2>
-    <p>Witamy na stronie PlotVenture! Najnowsza aktualizacja 21.06.2025: Dodaliśmy formularz kontaktowy z integracją Discord, ulepszyliśmy responsywność oraz dodaliśmy tryb jasny/ciemny.</p>
-    <p>Śledź nas, aby być na bieżąco z wszystkimi nowościami!</p>
+    <div id="news-list">Ładowanie aktualności...</div>
   </section>
 
   <section id="team" class="team-section">
@@ -258,10 +281,17 @@
     </form>
   </section>
 
- <footer>
-  <a href="https://avi0782.github.io/plotventure-core/polityka-prywatnosci.html" target="_blank" rel="noopener noreferrer">Polityka prywatności</a>
-  <span>© 2025 PlotVenture</span>
-</footer>
+  <footer>
+    <a href="https://avi0782.github.io/plotventure-core/polityka-prywatnosci.html" target="_blank" rel="noopener noreferrer">Polityka prywatności</a>
+    <span>© 2025 PlotVenture</span>
+    <!-- Sekcja social media -->
+    <div class="social-media">
+      <a href="https://facebook.com/TwojProfil" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://twitter.com/TwojProfil" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+      <a href="https://instagram.com/TwojProfil" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://discord.gg/7prNChKHnY" target="_blank" aria-label="Discord"><i class="fab fa-discord"></i></a>
+    </div>
+  </footer>
 
   <script>
     function toggleTheme() {
@@ -269,23 +299,24 @@
       document.documentElement.setAttribute("data-theme", current === "light" ? "dark" : "light");
     }
 
-    document.getElementById('contactForm').addEventListener('submit', async function(e) {
-      e.preventDefault();
-      const user = e.target.user.value;
-      const email = e.target.email.value;
-      const message = e.target.message.value;
-      const content = `**Nowa wiadomość z formularza kontaktowego:**\n👤 Użytkownik: ${user}\n📧 Email: ${email || "nie podano"}\n📨 Treść:\n${message}`;
+    // Ładowanie aktualności z news.json
+    async function loadNews() {
+      const newsList = document.getElementById('news-list');
+      try {
+        const response = await fetch('data/news.json');
+        if (!response.ok) throw new Error('Nie udało się załadować aktualności.');
+        const news = await response.json();
 
-      await fetch("https://discord.com/api/webhooks/1385661490794598461/TkirOjnpJu7aQ7mHpJW7C5OlX4HvNCa5VuF1cXNLIGXdEixAIVbFnU-373mqReloHEWx", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ content })
-      });
+        if (news.length === 0) {
+          newsList.innerHTML = '<p>Brak aktualności.</p>';
+          return;
+        }
 
-      alert("Wiadomość została wysłana!");
-      e.target.reset();
-    });
-  </script>
-
-</body>
-</html>
+        newsList.innerHTML = news.map(item => `
+          <article>
+            <h3>${item.title} <small>(${item.date})</small></h3>
+            <p>${item.content}</p>
+          </article>
+        `).join('');
+      } catch (err) {
+        news
