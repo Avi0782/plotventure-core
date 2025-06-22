@@ -5,16 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>PlotVenture - CORE</title>
 
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png" />
+
+  <!-- SEO -->
+  <meta name="description" content="PlotVenture to narzędzie do wspólnego opowiadania historii i zabawy RPG online." />
+  <meta name="keywords" content="plotventure, rpg, opowieści, fabuła, storytelling, gra" />
+  <meta property="og:title" content="PlotVenture - CORE" />
+  <meta property="og:description" content="Platforma do wspólnego opowiadania historii i zabawy RPG online." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="logo.png" />
+
   <!-- FontAwesome dla ikon social media -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-  />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
   <style>
-    /* ==========================
-       Kolory i podstawowy styl
-    =========================== */
     :root {
       --bg-color-dark: #0e001a;
       --text-color-dark: #ffffff;
@@ -34,7 +39,6 @@
 
       --transition-time: 0.3s;
     }
-
     html[data-theme="dark"] {
       --bg-color: var(--bg-color-dark);
       --text-color: var(--text-color-dark);
@@ -53,16 +57,20 @@
       --footer-bg: var(--footer-bg-light);
       --news-bg: var(--news-bg-light);
     }
-
+    html.high-contrast {
+      filter: contrast(1.5) brightness(1.15);
+    }
+    html.big-font {
+      font-size: 120%;
+    }
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: var(--bg-color);
       color: var(--text-color);
       overflow-x: hidden;
-      transition: background var(--transition-time), color var(--transition-time);
+      transition: background var(--transition-time), color var(--transition-time), filter 0.3s, font-size 0.3s;
     }
-
     nav {
       background: var(--panel);
       padding: 1rem 2rem;
@@ -77,7 +85,7 @@
       font-size: 1.7rem;
       font-weight: 900;
       color: var(--accent);
-      cursor: default;
+      cursor: pointer;
       user-select: none;
     }
     nav .links a {
@@ -92,7 +100,12 @@
       color: var(--accent);
       text-shadow: 0 0 6px var(--accent);
     }
-    nav .toggle-theme, nav .toggle-lang {
+    nav .tools {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    nav button {
       cursor: pointer;
       background: none;
       border: none;
@@ -101,11 +114,10 @@
       margin-left: 1rem;
       transition: color 0.2s;
     }
-    nav .toggle-theme:hover, nav .toggle-lang:hover {
+    nav button:hover {
       color: var(--accent);
       text-shadow: 0 0 6px var(--accent);
     }
-
     header {
       text-align: center;
       padding: 2rem 1rem;
@@ -131,16 +143,18 @@
       text-align: center;
       text-shadow: 0 0 6px var(--accent);
     }
-
     section {
       max-width: 1000px;
       margin: 2rem auto;
       padding: 0 1rem;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s, transform 0.7s;
     }
-
-    /* ======================
-       Sekcja Aktualności
-    ======================= */
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
     .news-section {
       background-color: var(--news-bg);
       border-radius: 12px;
@@ -166,10 +180,6 @@
       font-weight: 400;
       color: var(--accent);
     }
-
-    /* ======================
-       Sekcja O nas
-    ======================= */
     .about-section {
       background-color: var(--panel);
       border-radius: 12px;
@@ -180,10 +190,6 @@
       line-height: 1.6;
       font-size: 1.15rem;
     }
-
-    /* ======================
-       Sekcja Zespół
-    ======================= */
     .team-section {
       padding-top: 0;
     }
@@ -242,10 +248,6 @@
       object-fit: contain;
       border-radius: 3px;
     }
-
-    /* ======================
-       Sekcja Formularza Kontaktowego
-    ======================= */
     .contact-section form {
       display: flex;
       flex-direction: column;
@@ -287,10 +289,6 @@
       background-color: #b778ff;
       box-shadow: 0 0 15px #b778ff;
     }
-
-    /* ======================
-       Sekcja FAQ
-    ======================= */
     .faq-section {
       max-width: 800px;
       margin: 2rem auto;
@@ -322,10 +320,6 @@
       margin: 0.5rem 0 0 1rem;
       font-size: 1rem;
     }
-
-    /* ======================
-       Sekcja Opinie
-    ======================= */
     .reviews-section {
       max-width: 900px;
       margin: 2rem auto;
@@ -357,4 +351,418 @@
     .reviews-section input:focus, .reviews-section textarea:focus {
       border-color: #d9a0ff;
       outline: none;
-      box-shadow: 0 0 
+      box-shadow: 0 0 10px #d9a0ff;
+    }
+    .review-list {
+      margin-top: 2rem;
+      text-align: left;
+    }
+    .review-item {
+      background: rgba(159, 95, 255, 0.1);
+      border-left: 4px solid var(--accent);
+      margin-bottom: 1rem;
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      animation: fadein 0.5s;
+    }
+    @keyframes fadein {
+      from { opacity: 0; transform: translateY(30px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    .review-stars {
+      display: flex;
+      gap: 0.1rem;
+      font-size: 1.2rem;
+      color: gold;
+      cursor: pointer;
+      user-select: none;
+      margin-right: 0.4rem;
+    }
+    .toast {
+      position: fixed;
+      left: 50%;
+      top: 48px;
+      transform: translateX(-50%);
+      z-index: 9999;
+      min-width: 200px;
+      background: var(--accent);
+      color: #fff;
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 0 14px var(--accent);
+      text-align: center;
+      font-weight: bold;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s;
+    }
+    .toast.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .footer-social {
+      margin: 0.5rem 0 1rem 0;
+    }
+    .footer-social a {
+      color: var(--accent);
+      margin: 0 0.7rem;
+      font-size: 1.5rem;
+      transition: color 0.2s;
+    }
+    .footer-social a:hover {
+      color: #fff;
+      text-shadow: 0 0 8px var(--accent);
+    }
+    footer {
+      background: var(--footer-bg);
+      color: var(--text-color);
+      text-align: center;
+      padding: 1.5rem 1rem 1rem 1rem;
+      border-top: 2px solid var(--accent);
+      margin-top: 2rem;
+    }
+    /* 404 */
+    .notfound {
+      text-align: center;
+      color: var(--accent);
+      padding: 5rem 1rem;
+      font-size: 2.5rem;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo" onclick="smoothScrollTo('header')">PlotVenture</div>
+    <div class="links">
+      <a href="#news" class="nav-link active" data-section="news">Aktualności</a>
+      <a href="#about" class="nav-link" data-section="about">O nas</a>
+      <a href="#team" class="nav-link" data-section="team">Zespół</a>
+      <a href="#contact" class="nav-link" data-section="contact">Kontakt</a>
+      <a href="#faq" class="nav-link" data-section="faq">FAQ</a>
+      <a href="#reviews" class="nav-link" data-section="reviews">Opinie</a>
+    </div>
+    <div class="tools">
+      <button title="Przełącz motyw" id="theme-btn"><i class="fa-solid fa-moon"></i></button>
+      <button title="Przełącz język" id="lang-btn"><i class="fa-solid fa-language"></i></button>
+      <button title="Wysoki kontrast" id="contrast-btn"><i class="fa-solid fa-low-vision"></i></button>
+      <button title="Większa czcionka" id="font-btn"><i class="fa-solid fa-font"></i></button>
+    </div>
+  </nav>
+
+  <header id="header">
+    <img src="logo.png" alt="Logo PlotVenture" />
+    <h1 id="main-title">PlotVenture</h1>
+    <p id="main-slogan">Twoja przygoda zaczyna się tutaj!</p>
+  </header>
+
+  <section id="news" class="news-section">
+    <h2 id="news-title">Aktualności</h2>
+    <article>
+      <h3>Start projektu!</h3>
+      <small>22 czerwca 2025</small>
+      <p>Witamy na stronie głównej projektu PlotVenture. Rozpoczynamy rozwój naszej platformy!</p>
+    </article>
+  </section>
+
+  <section id="about" class="about-section">
+    <h2 id="about-title">O nas</h2>
+    <p id="about-text">
+      PlotVenture to zespół pasjonatów tworzących narzędzia do wspólnego opowiadania historii i zabawy fabularnej online.
+    </p>
+  </section>
+
+  <section id="team" class="team-section">
+    <h2 id="team-title">Zespół</h2>
+    <div class="team-grid">
+      <div class="member">
+        <img src="avatar1.png" alt="Avi0782" />
+        <h3>Avi0782 <span class="role-badge"><i class="fa-solid fa-crown"></i> <span id="team-leader">Lider</span></span></h3>
+        <div id="member1-role">Programista, pomysłodawca projektu</div>
+      </div>
+      <!-- Dodaj kolejnych członków zespołu -->
+    </div>
+  </section>
+
+  <section id="contact" class="contact-section">
+    <h2 id="contact-title">Kontakt</h2>
+    <form id="contact-form" autocomplete="off">
+      <input type="text" id="contact-name" placeholder="Imię i nazwisko" required />
+      <input type="email" id="contact-email" placeholder="Adres e-mail" required />
+      <textarea id="contact-message" placeholder="Twoja wiadomość" rows="5" required></textarea>
+      <button type="submit" id="contact-btn">Wyślij</button>
+    </form>
+  </section>
+
+  <section id="faq" class="faq-section">
+    <h2 id="faq-title">FAQ</h2>
+    <details>
+      <summary id="faq1-q">Czym jest PlotVenture?</summary>
+      <p id="faq1">To platforma online do wspólnego tworzenia fabuły i zabawy w RPG!</p>
+    </details>
+    <details>
+      <summary id="faq2-q">Jak mogę dołączyć do zespołu?</summary>
+      <p id="faq2">Skontaktuj się z nami przez formularz powyżej!</p>
+    </details>
+  </section>
+
+  <section id="reviews" class="reviews-section">
+    <h2 id="reviews-title">Opinie</h2>
+    <form id="review-form" autocomplete="off">
+      <input type="text" id="review-name" placeholder="Imię" required />
+      <textarea id="review-text" placeholder="Twoja opinia" rows="4" required></textarea>
+      <div class="review-stars" id="star-container" title="Oceń">
+        <i class="fa-regular fa-star" data-star="1"></i>
+        <i class="fa-regular fa-star" data-star="2"></i>
+        <i class="fa-regular fa-star" data-star="3"></i>
+        <i class="fa-regular fa-star" data-star="4"></i>
+        <i class="fa-regular fa-star" data-star="5"></i>
+      </div>
+      <button type="submit" id="review-btn">Dodaj opinię</button>
+    </form>
+    <div class="review-list" id="review-list">
+      <div class="review-item"><span class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i></span><strong>Kasia:</strong> Super inicjatywa, trzymam kciuki!</div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-social">
+      <a href="#" aria-label="Discord" title="Discord"><i class="fab fa-discord"></i></a>
+      <a href="#" aria-label="GitHub" title="GitHub"><i class="fab fa-github"></i></a>
+      <a href="#" aria-label="Twitter" title="Twitter"><i class="fab fa-twitter"></i></a>
+    </div>
+    &copy; 2025 PlotVenture. Wszelkie prawa zastrzeżone.
+  </footer>
+
+  <div id="toast" class="toast"></div>
+  <div id="notfound" class="notfound">Nie znaleziono strony! (404)</div>
+
+  <script>
+    // --- Smooth scroll oraz aktywne linki ---
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', function(e){
+        e.preventDefault();
+        const section = this.getAttribute('data-section');
+        smoothScrollTo(section);
+      });
+    });
+    function smoothScrollTo(id){
+      const el = document.getElementById(id);
+      if(el){
+        window.scrollTo({ top: el.offsetTop-32, behavior: 'smooth' });
+        setActiveNav(id);
+      }
+    }
+    function setActiveNav(id){
+      document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+      document.querySelector(`.nav-link[data-section="${id}"]`)?.classList.add('active');
+    }
+    // Fade In sekcji przy scrollowaniu
+    function revealSections(){
+      document.querySelectorAll('section').forEach(sec=>{
+        const rect = sec.getBoundingClientRect();
+        if(rect.top<window.innerHeight-80) sec.classList.add('visible');
+      });
+    }
+    window.addEventListener('scroll', revealSections);
+    window.addEventListener('load', revealSections);
+
+    // --- Toast ---
+    function showToast(msg, color){
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.style.background = color||'var(--accent)';
+      toast.classList.add('show');
+      setTimeout(()=>toast.classList.remove('show'), 3500);
+    }
+
+    // --- Motyw, Kontrast, Czcionka z localStorage ---
+    const html = document.documentElement;
+    document.getElementById('theme-btn').onclick = ()=>{
+      const theme = html.getAttribute('data-theme')==='dark'?'light':'dark';
+      html.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+    }
+    document.getElementById('contrast-btn').onclick = ()=>{
+      html.classList.toggle('high-contrast');
+      localStorage.setItem('contrast', html.classList.contains('high-contrast')?'1':'');
+    }
+    document.getElementById('font-btn').onclick = ()=>{
+      html.classList.toggle('big-font');
+      localStorage.setItem('bigfont', html.classList.contains('big-font')?'1':'');
+    }
+    // Przywracanie z localStorage
+    (function(){
+      if(localStorage.getItem('theme')) html.setAttribute('data-theme', localStorage.getItem('theme'));
+      if(localStorage.getItem('contrast')) html.classList.add('high-contrast');
+      if(localStorage.getItem('bigfont')) html.classList.add('big-font');
+      if(localStorage.getItem('lang')) setLang(localStorage.getItem('lang'));
+    })();
+
+    // --- Obsługa języków (PL/EN) z localStorage ---
+    const translations = {
+      pl: {
+        mainTitle: "PlotVenture",
+        mainSlogan: "Twoja przygoda zaczyna się tutaj!",
+        newsTitle: "Aktualności",
+        aboutTitle: "O nas",
+        about: "PlotVenture to zespół pasjonatów tworzących narzędzia do wspólnego opowiadania historii i zabawy fabularnej online.",
+        teamTitle: "Zespół",
+        teamLeader: "Lider",
+        member1: "Programista, pomysłodawca projektu",
+        contactTitle: "Kontakt",
+        contactBtn: "Wyślij",
+        faqTitle: "FAQ",
+        faq1q: "Czym jest PlotVenture?",
+        faq1: "To platforma online do wspólnego tworzenia fabuły i zabawy w RPG!",
+        faq2q: "Jak mogę dołączyć do zespołu?",
+        faq2: "Skontaktuj się z nami przez formularz powyżej!",
+        reviewsTitle: "Opinie",
+        reviewBtn: "Dodaj opinię",
+        reviewPlaceholder: "Twoja opinia",
+        reviewName: "Imię",
+        toastContactOK: "Dziękujemy za kontakt! Odezwiemy się wkrótce.",
+        toastContactErr: "Podaj poprawny adres e-mail i wiadomość!",
+        toastReviewOK: "Dziękujemy za opinię!",
+        toastReviewErr: "Podaj imię i opinię (min. 5 znaków)!",
+        notfound: "Nie znaleziono strony! (404)"
+      },
+      en: {
+        mainTitle: "PlotVenture",
+        mainSlogan: "Your adventure begins here!",
+        newsTitle: "News",
+        aboutTitle: "About Us",
+        about: "PlotVenture is a team of enthusiasts creating tools for collaborative storytelling and online role-playing.",
+        teamTitle: "Team",
+        teamLeader: "Leader",
+        member1: "Developer, project initiator",
+        contactTitle: "Contact",
+        contactBtn: "Send",
+        faqTitle: "FAQ",
+        faq1q: "What is PlotVenture?",
+        faq1: "It's an online platform for collaborative storytelling and RPG fun!",
+        faq2q: "How can I join the team?",
+        faq2: "Contact us via the form above!",
+        reviewsTitle: "Reviews",
+        reviewBtn: "Add review",
+        reviewPlaceholder: "Your review",
+        reviewName: "Name",
+        toastContactOK: "Thank you for contacting us! We will respond soon.",
+        toastContactErr: "Please provide a valid email and message!",
+        toastReviewOK: "Thank you for your review!",
+        toastReviewErr: "Enter your name and a review (min. 5 characters)!",
+        notfound: "Page not found! (404)"
+      }
+    };
+    let currentLang = "pl";
+    function setLang(lang){
+      currentLang = lang;
+      document.getElementById("main-title").textContent = translations[lang].mainTitle;
+      document.getElementById("main-slogan").textContent = translations[lang].mainSlogan;
+      document.getElementById("news-title").textContent = translations[lang].newsTitle;
+      document.getElementById("about-title").textContent = translations[lang].aboutTitle;
+      document.getElementById("about-text").textContent = translations[lang].about;
+      document.getElementById("team-title").textContent = translations[lang].teamTitle;
+      document.getElementById("team-leader").textContent = translations[lang].teamLeader;
+      document.getElementById("member1-role").textContent = translations[lang].member1;
+      document.getElementById("contact-title").textContent = translations[lang].contactTitle;
+      document.getElementById("contact-btn").textContent = translations[lang].contactBtn;
+      document.getElementById("faq-title").textContent = translations[lang].faqTitle;
+      document.getElementById("faq1-q").textContent = translations[lang].faq1q;
+      document.getElementById("faq1").textContent = translations[lang].faq1;
+      document.getElementById("faq2-q").textContent = translations[lang].faq2q;
+      document.getElementById("faq2").textContent = translations[lang].faq2;
+      document.getElementById("reviews-title").textContent = translations[lang].reviewsTitle;
+      document.getElementById("review-btn").textContent = translations[lang].reviewBtn;
+      document.getElementById("review-text").placeholder = translations[lang].reviewPlaceholder;
+      document.getElementById("review-name").placeholder = translations[lang].reviewName;
+      document.getElementById("notfound").textContent = translations[lang].notfound;
+      localStorage.setItem('lang', lang);
+    }
+    document.getElementById('lang-btn').onclick = ()=>{
+      setLang(currentLang==="pl"?"en":"pl");
+    }
+
+    // --- Formularz kontaktowy ---
+    document.getElementById("contact-form").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const name = document.getElementById("contact-name").value.trim();
+      const email = document.getElementById("contact-email").value.trim();
+      const msg = document.getElementById("contact-message").value.trim();
+      if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || name.length<2 || msg.length<5) {
+        showToast(translations[currentLang].toastContactErr, "red");
+        return;
+      }
+      showToast(translations[currentLang].toastContactOK, "var(--accent)");
+      this.reset();
+    });
+
+    // --- Formularz opinii (gwiazdki, dynamiczne dodawanie) ---
+    let selectedStars = 5;
+    document.getElementById("star-container").addEventListener("mouseover", function(e){
+      if(e.target.dataset.star){
+        const val = parseInt(e.target.dataset.star);
+        highlightStars(val);
+      }
+    });
+    document.getElementById("star-container").addEventListener("mouseout", function(){
+      highlightStars(selectedStars);
+    });
+    document.getElementById("star-container").addEventListener("click", function(e){
+      if(e.target.dataset.star){
+        selectedStars = parseInt(e.target.dataset.star);
+        highlightStars(selectedStars);
+      }
+    });
+    function highlightStars(cnt){
+      document.querySelectorAll("#star-container i").forEach((el,i)=>{
+        el.className = (i<cnt)?"fa-solid fa-star":"fa-regular fa-star";
+      });
+    }
+    highlightStars(selectedStars);
+
+    document.getElementById("review-form").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const name = document.getElementById("review-name").value.trim();
+      const text = document.getElementById("review-text").value.trim();
+      if(name.length < 2 || text.length < 5) {
+        showToast(translations[currentLang].toastReviewErr, "red");
+        return;
+      }
+      showToast(translations[currentLang].toastReviewOK, "var(--accent)");
+      const reviewList = document.getElementById("review-list");
+      const div = document.createElement("div");
+      div.className = "review-item";
+      let starsHTML = '<span class="review-stars">';
+      for(let i=1;i<=5;i++) starsHTML += `<i class="${i<=selectedStars?"fa-solid":"fa-regular"} fa-star"></i>`;
+      starsHTML += '</span>';
+      div.innerHTML = `${starsHTML}<strong>${name}:</strong> ${text}`;
+      reviewList.insertBefore(div, reviewList.firstChild);
+      this.reset();
+      selectedStars = 5;
+      highlightStars(selectedStars);
+    });
+
+    // --- Prosta obsługa 404 (nawigacja do nieistniejącej sekcji) ---
+    window.addEventListener('hashchange', function(){
+      const id = location.hash.replace('#','');
+      const sec = document.getElementById(id);
+      document.getElementById("notfound").style.display = sec?"none":"block";
+      if(sec) smoothScrollTo(id);
+    });
+
+    // --- Obsługa kliknięcia logo ---
+    window.smoothScrollTo = smoothScrollTo;
+
+    // --- Ustaw domyślny język na podstawie localStorage lub przeglądarki ---
+    (function(){
+      let lang = localStorage.getItem('lang') || (navigator.language.startsWith('pl')?'pl':'en');
+      setLang(lang);
+      revealSections();
+    })();
+  </script>
+</body>
+</html>
